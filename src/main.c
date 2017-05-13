@@ -1,4 +1,5 @@
 #include "includes/_socket.h"
+#include "includes/_server.h"
 
 int main(int ac, char **av)
 {
@@ -10,12 +11,12 @@ int main(int ac, char **av)
   init_sock(&mySock);
   bind_sock(&mySock);
   listen_sock(&mySock);
-  accept_c(&mySock);
-  printf("ip : %s\n", mySock.client_ip);
+  init_server(&mySock);
   if (close(mySock.fd) == -1)
   {
     perror("socket file descriptor");
     return (1);
   }
+  printf("fd : %d | client_fd : %d\n", mySock.fd, mySock.client_fd);
   return (0);
 }

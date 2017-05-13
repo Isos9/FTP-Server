@@ -8,7 +8,7 @@ void  init_sock(my_sock *_sock)
   _sock->s_in.sin_family = AF_INET;
   _sock->s_in.sin_port = htons(_sock->port);
   _sock->s_in.sin_addr.s_addr = INADDR_ANY;
-  _sock->fd = socket(AF_INET, SOCK_STREAM, pe->p_proto);
+  _sock->fd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, pe->p_proto);
   if (_sock->fd == -1)
   {
     perror("socket");
@@ -40,18 +40,10 @@ void  listen_sock(my_sock *_sock)
   }
 }
 
-void  accept_c(my_sock *_sock)
+int  accept_c(my_sock *_sock)
 {
   unsigned int size;
 
   size = sizeof(_sock->s_in);
-  if ((_sock->client_fd = accept(_sock->fd, (struct sockaddr *)&_sock->s_in, &size)) == -1)
-  {
-    if (close(_sock->fd) == -1)
-      perror("socket file descriptor");
-    else
-      perror("accept");
-    exit(1);
-  }
-  _sock->client_ip = inet_ntoa(_sock->s_in.sin_addr);
+  return ((_sock->client_fd = accept(_sock->fd, (struct sockaddr *)&_sock->s_in, &size)));
 }

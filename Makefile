@@ -1,7 +1,8 @@
 CC		=	gcc -W -Wall -Werror
 
 SRC		=	src/main.c	\
-			src/_socket.c
+			src/_socket.c	\
+			src/_server.c
 
 OBJ		=	$(SRC:.c=.o)
 

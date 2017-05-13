@@ -9,7 +9,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 typedef struct my_sock_s {
   int    fd;
@@ -22,6 +21,6 @@ typedef struct my_sock_s {
 void  init_sock(my_sock *_sock);
 void  bind_sock(my_sock *_sock);
 void  listen_sock(my_sock *_sock);
-void  accept_c(my_sock *_sock);
+int  accept_c(my_sock *_sock);
 
 #endif

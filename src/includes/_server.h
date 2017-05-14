@@ -7,6 +7,8 @@
 
 void  exit_signal();
 int  init_server(my_sock *_sock);
-int  handle_client(my_sock *_sock, pid_t pid);
+int  handle_new_client(my_sock *_sock, pid_t pid);
+int handle_client(my_sock *_sock);
+
 
 #endif

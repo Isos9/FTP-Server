@@ -45,5 +45,5 @@ int  accept_c(my_sock *_sock)
   unsigned int size;
 
   size = sizeof(_sock->s_in);
-  return ((_sock->client_fd = accept(_sock->fd, (struct sockaddr *)&_sock->s_in, &size)));
+  return ((_sock->client.fd = accept(_sock->fd, (struct sockaddr *)&_sock->s_in, &size)));
 }

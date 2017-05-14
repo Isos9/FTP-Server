@@ -8,6 +8,10 @@ int main(int ac, char **av)
   my_sock mySock;
 
   mySock.port = atoi(av[1]);
+  memset(mySock.client.user, 0, 64);
+  memset(mySock.client.passwd, 0, 64);
+  memset(mySock.client.buffer, 0, 1024);
+  mySock.client.logged = 0;
   init_sock(&mySock);
   bind_sock(&mySock);
   listen_sock(&mySock);
@@ -17,6 +21,6 @@ int main(int ac, char **av)
     perror("socket file descriptor");
     return (1);
   }
-  printf("fd : %d | client_fd : %d\n", mySock.fd, mySock.client_fd);
+  printf("fd : %d | client_fd : %d\n", mySock.fd, mySock.client.fd);
   return (0);
 }

@@ -8,7 +8,7 @@ void  init_sock(my_sock *_sock)
   _sock->s_in.sin_family = AF_INET;
   _sock->s_in.sin_port = htons(_sock->port);
   _sock->s_in.sin_addr.s_addr = INADDR_ANY;
-  _sock->fd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, pe->p_proto);
+  _sock->fd = socket(AF_INET, SOCK_STREAM, pe->p_proto);
   if (_sock->fd == -1)
   {
     perror("socket");
@@ -30,7 +30,7 @@ void  bind_sock(my_sock *_sock)
 
 void  listen_sock(my_sock *_sock)
 {
-  if (listen(_sock->fd, _sock->port) == -1)
+  if (listen(_sock->fd, 20) == -1)
   {
     if (close(_sock->fd) == -1)
       perror("socket file descriptor");

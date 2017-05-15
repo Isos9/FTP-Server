@@ -3,12 +3,12 @@
 #include "includes/_server.h"
 
 static int _serverRun = 1;
-
-void  exit_signal()
-{
-  _serverRun = 0;
-  write(1, "exit", 4);
-}
+//
+//void  exit_signal()
+//{
+//  _serverRun = 0;
+//  write(1, "exit", 4);
+//}
 
 int init_server(my_sock *_sock)
 {
@@ -29,7 +29,7 @@ int init_server(my_sock *_sock)
       else
         handle_new_client(_sock, pid);
     }
-    signal(SIGINT, exit_signal);
+//    signal(SIGINT, exit_signal);
   }
   return (0);
 }
@@ -56,7 +56,7 @@ int handle_client(my_sock *_sock)
 {
   char **resp;
 
-  write(_sock->client.fd, "Hello !\n", 8);
+  write(_sock->client.fd, "220 Hello !\r\n", 13);
   while (read(_sock->client.fd, _sock->client.buffer, 1024))
   {
     if (_sock->client.buffer[0] != '\r')
@@ -67,9 +67,6 @@ int handle_client(my_sock *_sock)
         printf("return\n");
         break;
       }
-      printf("OK(après)\n");
-//    printf("msg : %s | len : %ld\n", *resp, strlen(*resp));
-//    printf("fd : %d\n", _sock->client.fd);
       memset(_sock->client.buffer, 0, 1024);
       free(resp);
     }

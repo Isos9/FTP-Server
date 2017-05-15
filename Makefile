@@ -6,7 +6,9 @@ SRC		=	src/main.c	\
 			src/my_str_to_wordtab.c	\
 			src/cmd_client.c	\
 			src/login.c	\
-			src/reply_codes.c
+			src/reply_codes.c	\
+			src/help.c	\
+			src/directory.c
 
 OBJ		=	$(SRC:.c=.o)
 

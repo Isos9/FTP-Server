@@ -1,6 +1,8 @@
 #ifndef CMD_CLIENT_H_
   #define CMD_CLIENT_H_
 
+#include "help.h"
+#include "directory.h"
 #include "login.h"
 
 typedef int (*cmd_client)(my_sock *, char **);

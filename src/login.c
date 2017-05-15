@@ -4,18 +4,13 @@ int user_cmd(my_sock *_sock, char **resp)
 {
   if (resp)
   {
-    if (strcmp(resp[1], "Anonymous") == 0)
+    if (!_sock->client.logged)
     {
-      strcpy(_sock->client.user, resp[1]);
-      strcpy(_sock->client.passwd, resp[1]);
-      _sock->client.logged = 1;
-      write_protocole(_sock, 230);
+        strcpy(_sock->client.user, resp[1]);
+        write_protocole(_sock, 331);
     }
     else
-    {
-      strcpy(_sock->client.user, resp[1]);
-      write_protocole(_sock, 331);
-    }
+      write_protocole_s(_sock, "530 User already logged\n");
   }
   return (0);
 }
@@ -24,14 +19,48 @@ int passwd_cmd(my_sock *_sock, char **resp)
 {
   if (resp)
   {
-    if (strlen(_sock->client.user) > 0)
+    if (!_sock->client.logged)
     {
-      strcpy(_sock->client.passwd, resp[1]);
-      _sock->client.logged = 1;
-      write_protocole(_sock, 230);
+      if (strcmp(_sock->client.user, "Anonymous") == 0)
+      {
+        if (!resp[1] || (strlen(resp[1]) == 0))
+        {
+          _sock->client.logged = 1;
+          write_protocole(_sock, 230);
+        }
+      }
+      else if (strlen(_sock->client.user) > 0)
+      {
+        strcpy(_sock->client.passwd, resp[1]);
+        _sock->client.logged = 1;
+        write_protocole(_sock, 230);
+      }
+      else
+        write_protocole(_sock, 332);
     }
     else
-      write_protocole(_sock, 332);
+      write_protocole_s(_sock, "530 User already logged\n");
+  }
+  return (0);
+}
+
+int syst_cmd(my_sock *_sock, char **resp)
+{
+  char *msg;
+  struct utsname *buf;
+
+  if (resp)
+  {
+    if (_sock->client.logged)
+    {
+      buf = malloc(sizeof(struct utsname));
+      uname(buf);
+      msg = malloc(sizeof(char) * (strlen(buf->sysname) + 2));
+      sprintf(msg, "215 %s\n", buf->sysname);
+      write_protocole_s(_sock, msg);
+    }
+    else
+      write_protocole_s(_sock, "530 Please login with USER and PASS.\n");
   }
   return (0);
 }

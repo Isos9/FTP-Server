@@ -4,3 +4,4 @@ CMakeLists.txt
 *.o
 server
 vgcore.*
+mouli_myftp_student

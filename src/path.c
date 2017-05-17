@@ -1,5 +1,14 @@
 #include "includes/path.h"
 
+char *gen_real_path(my_sock *_sock, char *path)
+{
+  char *res;
+
+  res = malloc(sizeof(char) * (strlen(_sock->dir_name) + strlen(path) + 5));
+  sprintf(res, "%s%s", _sock->dir_name, path);
+  return (res);
+}
+
 void  init_path(my_sock *_sock, char *path)
 {
   char *root;
@@ -19,7 +28,10 @@ char  *check_path(my_sock *_sock, char *path)
 {
   char *r_path;
 
-  r_path = realpath(path, NULL);
+  if (path[0] == '/')
+    return (gen_real_path(_sock, path));
+  else
+    r_path = realpath(path, NULL);
   if (strlen(r_path) < strlen(_sock->dir_name))
   {
     write_protocole_s(_sock, "530 You can't go this way\n");

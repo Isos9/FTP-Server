@@ -2,6 +2,16 @@
 #include "includes/cmd_client.h"
 #include "includes/_server.h"
 
+void get_server_ip(my_sock *_sock)
+{
+  FILE  *in;
+  char buff[512];
+
+  in = popen("ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'", "r");
+  fgets(buff, sizeof(buff) - 1, in);
+  _sock->serv_ip = strdup(buff);
+}
+
 int init_server(my_sock *_sock)
 {
   pid_t   ppid;

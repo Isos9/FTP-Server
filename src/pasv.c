@@ -8,9 +8,9 @@ char *get_part(my_sock *_sock, int *i)
   j = 0;
   res = malloc(sizeof(char) * 5);
   memset(res, 0, 5);
-  while (_sock->client.ip[*i] && _sock->client.ip[*i] != '.')
+  while (_sock->serv_ip[*i] && _sock->serv_ip[*i] != '\n' && _sock->serv_ip[*i] != '.')
   {
-    res[j++] = _sock->client.ip[*i];
+    res[j++] = _sock->serv_ip[*i];
     *i = *i + 1;
   }
   res[*i] = 0;

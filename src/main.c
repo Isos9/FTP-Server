@@ -9,6 +9,9 @@ int main(int ac, char **av)
 
   mySock.port = atoi(av[1]);
   init_path(&mySock, av[2]);
+  get_server_ip(&mySock);
+  printf("serv_ip : %s", mySock.serv_ip);
+  printf("path : %s\n", mySock.dir_name);
   memset(mySock.client.user, 0, 64);
   memset(mySock.client.passwd, 0, 64);
   memset(mySock.client.buffer, 0, 1024);

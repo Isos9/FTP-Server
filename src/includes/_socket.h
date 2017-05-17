@@ -27,6 +27,7 @@ typedef struct my_sock_s {
   int    port;
   client_t client;
   char    *dir_name;
+  char    *serv_ip;
   struct sockaddr_in s_in;
   struct sockaddr_in s_in_pasv;
 } my_sock;

@@ -5,10 +5,10 @@
 #include <sys/wait.h>
 #include "_socket.h"
 
-void  exit_signal();
 int  init_server(my_sock *_sock);
 int  handle_new_client(my_sock *_sock, pid_t pid);
 int handle_client(my_sock *_sock);
+void get_server_ip(my_sock *_sock);
 
 
 #endif

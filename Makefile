@@ -8,7 +8,10 @@ SRC		=	src/main.c	\
 			src/login.c	\
 			src/reply_codes.c	\
 			src/help.c	\
-			src/directory.c
+			src/directory.c	\
+			src/path.c	\
+			src/data.c	\
+			src/pasv.c
 
 OBJ		=	$(SRC:.c=.o)
 

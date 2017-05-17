@@ -1,13 +1,14 @@
-#include "includes/_socket.h"
+#include "includes/path.h"
 #include "includes/_server.h"
 
 int main(int ac, char **av)
 {
-  if (ac != 2)
+  if (ac != 3)
     return (0);
   my_sock mySock;
 
   mySock.port = atoi(av[1]);
+  init_path(&mySock, av[2]);
   memset(mySock.client.user, 0, 64);
   memset(mySock.client.passwd, 0, 64);
   memset(mySock.client.buffer, 0, 1024);

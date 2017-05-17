@@ -29,7 +29,7 @@ proto_t  *init_replies()
   res[4] = create_proto(221, "Service closing control connection.");
   res[5] = create_proto(226, "Closing data connection.");
   res[6] = create_proto(230, "User logged in, proceed.");
-  res[7] = create_proto(250, "Requested file action okay, completed.");
+  res[7] = create_proto(250, "Requested file action completed.");
   res[8] = create_proto(257, "\"PATHNAME\" created.");
   res[9] = create_proto(331, "User name okay, need password.");
   res[10] = create_proto(332, "Need account for login.");

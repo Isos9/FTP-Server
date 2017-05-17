@@ -22,9 +22,13 @@ typedef struct client_s {
 
 typedef struct my_sock_s {
   int    fd;
+  int    d_fd;
+  int    pasv_mode;
   int    port;
   client_t client;
+  char    *dir_name;
   struct sockaddr_in s_in;
+  struct sockaddr_in s_in_pasv;
 } my_sock;
 
 void  init_sock(my_sock *_sock);

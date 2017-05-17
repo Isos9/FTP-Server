@@ -4,6 +4,8 @@ void  init_sock(my_sock *_sock)
 {
   struct protoent   *pe;
 
+  _sock->d_fd = -2;
+  _sock->pasv_mode = 0;
   pe = getprotobyname("TCP");
   _sock->s_in.sin_family = AF_INET;
   _sock->s_in.sin_port = htons(_sock->port);

@@ -2,14 +2,6 @@
 #include "includes/cmd_client.h"
 #include "includes/_server.h"
 
-static int _serverRun = 1;
-//
-//void  exit_signal()
-//{
-//  _serverRun = 0;
-//  write(1, "exit", 4);
-//}
-
 int init_server(my_sock *_sock)
 {
   pid_t   ppid;
@@ -17,7 +9,7 @@ int init_server(my_sock *_sock)
 
   pid = -2;
   ppid = getpid();
-  while (_serverRun && ppid == getpid())
+  while (ppid == getpid())
   {
     if (accept_c(_sock) != -1)
     {
@@ -29,7 +21,6 @@ int init_server(my_sock *_sock)
       else
         handle_new_client(_sock, pid);
     }
-//    signal(SIGINT, exit_signal);
   }
   return (0);
 }
@@ -56,7 +47,7 @@ int handle_client(my_sock *_sock)
 {
   char **resp;
 
-  write(_sock->client.fd, "220 Hello !\r\n", 13);
+  write_protocole_s(_sock,"220 Hello !\r\n");
   while (read(_sock->client.fd, _sock->client.buffer, 1024))
   {
     if (_sock->client.buffer[0] != '\r')

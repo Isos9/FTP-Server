@@ -69,7 +69,6 @@ int  list_cmd(my_sock *_sock, char **resp)
     }
     else
       write_protocole_s(_sock, "530 Please login with USER and PASS.\n");
-
   }
   return (0);
 }

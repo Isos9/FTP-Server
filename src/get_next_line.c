@@ -10,6 +10,16 @@
 
 #include "includes/get_next_line.h"
 
+int my_strlen(char *str)
+{
+  int i;
+
+  i = 0;
+  while (str && str[i])
+    i++;
+  return (i);
+}
+
 char	*my_strcat(char *dest, char *src)
 {
   int	i;
@@ -76,7 +86,7 @@ char	*get_line(char	*buff, int  pos)
 char	*get_next_line(int fd)
 {
   char	*r;
-  int	size;
+  ssize_t	size;
   static int	pos = 0;
   static char	buff[READ_SIZE];
 

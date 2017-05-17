@@ -15,4 +15,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+
+int my_strlen(char *str);
+char	*my_strcat(char *dest, char *src);
+int	count_line(char *buff);
+char	*get_line(char	*buff, int  pos);
+char	*get_next_line(int fd);
+
 #endif /*!READ_SIZE*/

@@ -11,7 +11,9 @@ SRC		=	src/main.c	\
 			src/directory.c	\
 			src/path.c	\
 			src/data.c	\
-			src/pasv.c
+			src/pasv.c	\
+			src/get_next_line.c	\
+			src/down_up.c
 
 OBJ		=	$(SRC:.c=.o)
 

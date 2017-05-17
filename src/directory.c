@@ -84,6 +84,7 @@ int cwd_cmd(my_sock *_sock, char **resp)
     {
       if ((path = check_path(_sock, resp[1])))
       {
+        printf("path(cwd) : %s\n", path);
         if (chdir(path) == -1)
         {
           write_protocole_s(_sock, "530 No such directory\n");

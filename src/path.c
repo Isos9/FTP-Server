@@ -32,7 +32,7 @@ char  *check_path(my_sock *_sock, char *path)
     return (gen_real_path(_sock, path));
   else
     r_path = realpath(path, NULL);
-  if (strlen(r_path) < strlen(_sock->dir_name))
+  if (!r_path || (strlen(r_path) < strlen(_sock->dir_name)))
   {
     write_protocole_s(_sock, "530 You can't go this way\n");
     return (NULL);

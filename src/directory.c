@@ -57,7 +57,7 @@ int  list_cmd(my_sock *_sock, char **resp)
         i = -1;
         size = sizeof(_sock->s_in_pasv);
         fd_d = accept(_sock->d_fd, (struct sockaddr *)&_sock->s_in_pasv, &size);
-        list = get_curr_list();
+        list = get_curr_list(_sock, resp);
         while (list && list[++i])
           write(fd_d, list[i], strlen(list[i]));
         close(fd_d);

@@ -8,6 +8,6 @@
 char *gen_real_path(my_sock *_sock, char *path);
 void  init_path(my_sock *_sock, char *path);
 char  *check_path(my_sock *_sock, char *path);
-char **get_curr_list();
+char **get_curr_list(my_sock *_sock, char **resp);
 
 #endif

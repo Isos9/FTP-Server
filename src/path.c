@@ -40,16 +40,26 @@ char  *check_path(my_sock *_sock, char *path)
   return (r_path);
 }
 
-char **get_curr_list()
+char **get_curr_list(my_sock *_sock, char **resp)
 {
   int i;
   FILE  *in;
   char buff[512];
   char **res;
+  char *cmd;
 
   i = 0;
   res = malloc(sizeof(char*) * 64);
-  in = popen("/bin/ls -l", "r");
+  cmd = malloc(sizeof(char) * 128);
+  if (resp[1])
+  {
+    if (resp[1][0] == '/')
+      resp[1] = gen_real_path(_sock, resp[1]);
+    sprintf(cmd, "/bin/ls -l %s", resp[1]);
+  }
+  else
+    sprintf(cmd, "/bin/ls -l");
+  in = popen(cmd, "r");
   fgets(buff, sizeof(buff), in);
   while (fgets(buff, sizeof(buff) - 1, in) != NULL)
     res[i++] = strdup(buff);

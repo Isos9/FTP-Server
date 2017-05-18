@@ -14,3 +14,16 @@ int feat_cmd(my_sock *_sock, char **resp)
   }
   return (0);
 }
+
+int help_cmd(my_sock *_sock, char **resp)
+{
+  if (resp)
+  {
+    if (_sock->client.logged)
+    {
+      write(_sock->client.fd, "214-Help\n", 9);
+      write(_sock->client.fd, "214 End\n", 8);
+    }
+  }
+  return (0);
+}

@@ -29,14 +29,8 @@ int passwd_cmd(my_sock *_sock, char **resp)
           write_protocole(_sock, 230);
         }
       }
-      else if (strlen(_sock->client.user) > 0)
-      {
-        strcpy(_sock->client.passwd, resp[1]);
-        _sock->client.logged = 1;
-        write_protocole(_sock, 230);
-      }
       else
-        write_protocole(_sock, 332);
+        write_protocole_s(_sock,"530 Bad login\n");
     }
     else
       write_protocole_s(_sock, "530 User already logged\n");

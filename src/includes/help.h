@@ -5,5 +5,6 @@
 #include "_socket.h"
 
 int feat_cmd(my_sock *_sock, char **resp);
+int help_cmd(my_sock *_sock, char **resp);
 
 #endif

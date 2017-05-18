@@ -38,7 +38,7 @@ int retr_cmd(my_sock *_sock, char **resp)
         if ((fd = open(resp[1], O_RDONLY)) != -1)
           download_data(_sock, fd);
         else
-          write_protocole_s(_sock, "530 No such file or directory\n");
+          write_protocole_s(_sock, "550 Failed to open file\n");
       }
       else
         write_protocole_s(_sock, "530 Use PORT or PASV mode.\n");

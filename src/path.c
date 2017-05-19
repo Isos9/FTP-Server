@@ -28,15 +28,15 @@ char  *check_path(my_sock *_sock, char *path)
 {
   char *r_path;
 
+  if (!path)
+    return (NULL);
   if (path[0] == '/')
-    return (gen_real_path(_sock, path));
+    r_path = realpath(gen_real_path(_sock, path), NULL);
   else
     r_path = realpath(path, NULL);
+  printf("r_path : %s\n", r_path);
   if (!r_path || (strlen(r_path) < strlen(_sock->dir_name)))
-  {
-    write_protocole_s(_sock, "530 You can't go this way\n");
     return (NULL);
-  }
   return (r_path);
 }
 

@@ -28,7 +28,7 @@ cmd_t *init_cmd()
 {
   cmd_t *res;
 
-  res = malloc(sizeof(cmd_t) * 14);
+  res = malloc(sizeof(cmd_t) * 17);
   res[0] = new_cmd("USER", user_cmd);
   res[1] = new_cmd("PASS", passwd_cmd);
   res[2] = new_cmd("SYST", syst_cmd);
@@ -41,8 +41,11 @@ cmd_t *init_cmd()
   res[9] = new_cmd("RETR", retr_cmd);
   res[10] = new_cmd("NOOP", noop_cmd);
   res[11] = new_cmd("HELP", help_cmd);
-  res[12] = new_cmd("QUIT", quit_cmd);
-  res[13] = new_cmd("", NULL);
+  res[12] = new_cmd("CDUP", cdup_cmd);
+  res[13] = new_cmd("DELE", dele_cmd);
+  res[14] = new_cmd("STOR", stor_cmd);
+  res[15] = new_cmd("QUIT", quit_cmd);
+  res[16] = new_cmd("", NULL);
   return (res);
 }
 
@@ -62,4 +65,3 @@ int exec_cmd(my_sock *_sock, char **resp)
   write_protocole_s(_sock, "500 Bad command\n");
   return (0);
 }
-

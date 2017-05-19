@@ -65,7 +65,7 @@ int  list_cmd(my_sock *_sock, char **resp)
         write_protocole(_sock, 226);
       }
       else
-        write_protocole_s(_sock, "530 Use PORT or PASV mode.\n");
+        write_protocole_s(_sock, "425 Use PORT or PASV mode.\n");
     }
     else
       write_protocole_s(_sock, "530 Please login with USER and PASS.\n");
@@ -86,14 +86,23 @@ int cwd_cmd(my_sock *_sock, char **resp)
         printf("path(cwd) : %s\n", path);
         if (chdir(path) == -1)
         {
-          write_protocole_s(_sock, "530 No such directory\n");
+          write_protocole_s(_sock, "550 Failed to change directory.\n");
           return (0);
         }
         write_protocole(_sock, 250);
       }
+      else
+        write_protocole_s(_sock, "550 Failed to change directory.\n");
     }
     else
       write_protocole_s(_sock, "530 Please login with USER and PASS.\n");
   }
+  return (0);
+}
+
+int cdup_cmd(my_sock *_sock, char **resp)
+{
+  resp[1] = strdup("..");
+  cwd_cmd(_sock, resp);
   return (0);
 }

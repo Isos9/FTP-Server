@@ -58,7 +58,7 @@ int exec_cmd(my_sock *_sock, char **resp)
   res = init_cmd();
   while (res[i].fct)
   {
-    if (resp[0] && strcmp(resp[0], res[i].name) == 0)
+    if (resp[0] && strcasecmp(resp[0], res[i].name) == 0)
       return (res[i].fct(_sock, resp));
     i++;
   }

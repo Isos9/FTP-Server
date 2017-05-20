@@ -50,8 +50,8 @@ void  write_protocole(my_sock *_sock, int proto_num)
   {
     if (proto_num == proto[i].nbr)
     {
-      msg = malloc(sizeof(char) * (strlen(proto[i].msg) + 1));
-      memset(msg, 0, strlen(proto[i].msg));
+      msg = malloc(sizeof(char) * (strlen(proto[i].msg) + 10));
+      memset(msg, 0, strlen(proto[i].msg) + 10);
       sprintf(msg, "%d %s\r\n", proto[i].nbr, proto[i].msg);
       write(_sock->client.fd, msg, strlen(msg));
       break;

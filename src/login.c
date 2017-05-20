@@ -21,7 +21,7 @@ int passwd_cmd(my_sock *_sock, char **resp)
   {
     if (!_sock->client.logged)
     {
-      if (strcmp(_sock->client.user, "Anonymous") == 0)
+      if (strcasecmp(_sock->client.user, "anonymous") == 0)
       {
         if (!resp[1] || (strlen(resp[1]) == 0))
         {

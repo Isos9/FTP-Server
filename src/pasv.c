@@ -6,14 +6,14 @@ char *get_part(my_sock *_sock, int *i)
   char *res;
 
   j = 0;
-  res = malloc(sizeof(char) * 5);
-  memset(res, 0, 5);
+  res = malloc(sizeof(char) * 4);
+  memset(res, 0, 4);
   while (_sock->serv_ip[*i] && _sock->serv_ip[*i] != '\n' && _sock->serv_ip[*i] != '.')
   {
     res[j++] = _sock->serv_ip[*i];
     *i = *i + 1;
   }
-  res[*i] = 0;
+   res[j] = 0;
   *i = *i + 1;
   return (res);
 }
@@ -27,7 +27,7 @@ char **split_ip(my_sock *_sock)
   res = malloc(sizeof(char *) * 5);
   i = 0;
   j = 0;
-  while (i < 5)
+  while (i < 4)
   {
     res[i] = get_part(_sock, &j);
     i++;

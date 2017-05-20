@@ -1,4 +1,4 @@
-CC		=	gcc -W -Wall -Werror
+CC		=	gcc -W -Wall -Werror -g
 
 SRC		=	src/main.c	\
 			src/_socket.c	\

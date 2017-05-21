@@ -53,7 +53,7 @@ int stor_cmd(my_sock *_sock, char **resp)
   {
     if (_sock->pasv_mode)
     {
-      if ((path = check_path(_sock, resp[1])))
+      if ((path = check_path_up(_sock, resp[1])))
       {
         if ((fd = open(path, O_CREAT | O_TRUNC | O_RDWR, S_IRWXU)) != -1)
           upload_data(_sock, fd);

@@ -13,7 +13,7 @@ SRC		=	src/main.c	\
 			src/data.c	\
 			src/pasv.c	\
 			src/get_next_line.c	\
-			src/down_up.c
+			src/down_up_lst.c
 
 OBJ		=	$(SRC:.c=.o)
 

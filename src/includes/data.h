@@ -2,7 +2,7 @@
   #define DATA_H_
 
 #include "get_next_line.h"
-#include "down_up.h"
+#include "down_up_lst.h"
 #include "pasv.h"
 #include "reply_codes.h"
 #include "_socket.h"

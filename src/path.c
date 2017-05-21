@@ -40,38 +40,44 @@ char  *check_path(my_sock *_sock, char *path)
   return (r_path);
 }
 
-char **get_curr_list(my_sock *_sock, char **resp)
+char *check_path_up(my_sock *_sock, char *path)
 {
-  int i;
-  FILE  *in;
-  char buff[512];
-  char **res;
-  char *cmd;
+  char *r_path;
+  char *tmp_path;
+  char *ptr;
 
-  i = 0;
-  res = malloc(sizeof(char*) * 64);
-  cmd = malloc(sizeof(char) * 128);
-  if (resp[1])
+  tmp_path = malloc(sizeof(char) * (strlen(path) + 1024));
+  if ((ptr = rindex(path, '/')))
   {
-    if (resp[1][0] == '/')
-      resp[1] = gen_real_path(_sock, resp[1]);
-    sprintf(cmd, "/bin/ls -l %s", resp[1]);
+    if (path[0] == '/')
+      sprintf(tmp_path, "%s%s", _sock->dir_name, cut_path(path, ptr - path));
+    else
+      sprintf(tmp_path, "%s/%s", _sock->dir_name, cut_path(path, ptr - path));
+    if ((r_path = realpath(tmp_path, NULL)))
+    {
+      if (strlen(r_path) >= strlen(_sock->dir_name))
+        return (path);
+      else
+        return (NULL);
+    }
+    else
+      return (NULL);
   }
-  else
-    sprintf(cmd, "/bin/ls -l");
-  in = popen(cmd, "r");
-  fgets(buff, sizeof(buff), in);
-  while (fgets(buff, sizeof(buff) - 1, in) != NULL)
-    res[i++] = strdup(buff);
-  res[i] = NULL;
-  pclose(in);
-  return (res);
+  return (path);
 }
 
-//char *check_path_up(my_sock *_sock, char *path)
-//{
-//  char *r_path;
-//
-//
-//  return (r_path);
-//}
+char *cut_path(char *path, int len)
+{
+  int i;
+  char *res;
+
+  i = 0;
+  res = malloc(sizeof(char) * (len + 1));
+  while (i < len)
+  {
+    res[i] = path[i];
+    i++;
+  }
+  res[i] = 0;
+  return (res);
+}

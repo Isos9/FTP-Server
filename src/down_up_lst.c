@@ -1,4 +1,4 @@
-#include "includes/down_up.h"
+#include "includes/down_up_lst.h"
 
 void  download_data(my_sock *_sock, int fd)
 {
@@ -48,4 +48,32 @@ void upload_data(my_sock *_sock, int fd)
   close(fd_d);
   close(fd);
   printf("upload complete\n");
+}
+
+char **get_curr_list(my_sock *_sock, char **resp)
+{
+  int i;
+  FILE  *in;
+  char buff[512];
+  char **res;
+  char *cmd;
+
+  i = 0;
+  res = malloc(sizeof(char*) * 64);
+  cmd = malloc(sizeof(char) * 128);
+  if (resp[1])
+  {
+    if (resp[1][0] == '/')
+      resp[1] = gen_real_path(_sock, resp[1]);
+    sprintf(cmd, "/bin/ls -l %s", resp[1]);
+  }
+  else
+    sprintf(cmd, "/bin/ls -l");
+  in = popen(cmd, "r");
+  fgets(buff, sizeof(buff), in);
+  while (fgets(buff, sizeof(buff) - 1, in) != NULL)
+    res[i++] = strdup(buff);
+  res[i] = NULL;
+  pclose(in);
+  return (res);
 }

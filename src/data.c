@@ -85,6 +85,8 @@ int dele_cmd(my_sock *_sock, char **resp)
       }
       write_protocole(_sock, 250);
     }
+    else
+      write_protocole_s(_sock, "550 Failed to delete file or directory.\n");
   }
   return (0);
 }

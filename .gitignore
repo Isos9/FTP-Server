@@ -1,8 +1,0 @@
-.idea/
-cmake-build-debug/
-srv_dir/
-CMakeLists.txt
-*.o
-server
-vgcore.*
-mouli_myftp_student

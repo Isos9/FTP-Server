@@ -1,29 +1,41 @@
+/*
+** reply_codes.c for ftp in /home/isos/Workspace/Epitech/PSU_2016_myftp/src
+** 
+** Made by Sébastien Jacobin
+** Login   <sebastien.jacobin@epitech.net>
+** 
+** Started on  Sun May 21 22:27:58 2017 Sébastien Jacobin
+** Last update Sun May 21 22:30:22 2017 Sébastien Jacobin
+*/
+
 #include "includes/reply_codes.h"
 
-proto_t create_proto(int proto, char *str)
+proto_t	create_proto(int proto, char *str)
 {
-  int i;
-  proto_t res;
+  int		i;
+  proto_t	res;
 
   i = 0;
   res.nbr = proto;
   res.msg = malloc(sizeof(char) * (strlen(str) + 1));
   while (str && str[i])
-  {
-    res.msg[i] = str[i];
-    i++;
-  }
+    {
+      res.msg[i] = str[i];
+      i++;
+    }
   res.msg[i] = 0;
   return (res);
 }
 
-proto_t  *init_replies()
+proto_t	*init_replies()
 {
-  proto_t *res;
+  proto_t	*res;
 
   res = malloc(sizeof(proto_t) * 12);
-  res[0] = create_proto(125, "Data connection already open; transfer starting.");
-  res[1] = create_proto(150, "File status okay; about to open data connection.");
+  res[0] = create_proto(125, "Data connection already open; "
+          "transfer starting.");
+  res[1] = create_proto(150, "File status okay; about "
+          "to open data connection.");
   res[2] = create_proto(200, "Command okay.");
   res[3] = create_proto(220, "Service ready for new user.");
   res[4] = create_proto(221, "Service closing control connection.");
@@ -38,30 +50,30 @@ proto_t  *init_replies()
   return (res);
 }
 
-void  write_protocole(my_sock *_sock, int proto_num)
+void	write_protocole(my_sock *_sock, int proto_num)
 {
-  int i;
-  proto_t *proto;
-  char *msg;
+  int		i;
+  proto_t	*proto;
+  char		*msg;
 
   i = 0;
   proto = init_replies();
   while (proto[i].nbr)
-  {
-    if (proto_num == proto[i].nbr)
     {
-      msg = malloc(sizeof(char) * (strlen(proto[i].msg) + 10));
-      memset(msg, 0, strlen(proto[i].msg) + 10);
-      sprintf(msg, "%d %s\r\n", proto[i].nbr, proto[i].msg);
-      write(_sock->client.fd, msg, strlen(msg));
-      break;
+      if (proto_num == proto[i].nbr)
+	{
+	  msg = malloc(sizeof(char) * (strlen(proto[i].msg) + 10));
+	  memset(msg, 0, strlen(proto[i].msg) + 10);
+	  sprintf(msg, "%d %s\r\n", proto[i].nbr, proto[i].msg);
+	  write(_sock->client.fd, msg, strlen(msg));
+	  break;
+	}
+      i++;
     }
-    i++;
-  }
 }
 
 
-void  write_protocole_s(my_sock *_sock, char *str)
+void	write_protocole_s(my_sock *_sock, char *str)
 {
   write(_sock->client.fd, str, strlen(str));
 }

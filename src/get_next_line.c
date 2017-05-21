@@ -5,14 +5,14 @@
 ** Login   <sebastien.jacobin@epitech.net>
 ** 
 ** Started on  Mon Nov 28 11:27:05 2016 Sébastien Jacobin
-** Last update Sun Dec  4 14:44:51 2016 Sébastien Jacobin
+** Last update Sun May 21 22:19:37 2017 Sébastien Jacobin
 */
 
 #include "includes/get_next_line.h"
 
-int my_strlen(char *str)
+int	my_strlen(char *str)
 {
-  int i;
+  int	i;
 
   i = 0;
   while (str && str[i])

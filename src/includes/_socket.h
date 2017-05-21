@@ -1,3 +1,13 @@
+/*
+** _socket.h for ftp in /home/isos/Workspace/Epitech/PSU_2016_myftp/src/includes
+** 
+** Made by Sébastien Jacobin
+** Login   <sebastien.jacobin@epitech.net>
+** 
+** Started on  Sun May 21 23:19:12 2017 Sébastien Jacobin
+** Last update Sun May 21 23:19:15 2017 Sébastien Jacobin
+*/
+
 #ifndef MY_SOCKET_H_
   #define MY_SOCKET_H_
 

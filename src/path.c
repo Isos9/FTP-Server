@@ -67,3 +67,11 @@ char **get_curr_list(my_sock *_sock, char **resp)
   pclose(in);
   return (res);
 }
+
+//char *check_path_up(my_sock *_sock, char *path)
+//{
+//  char *r_path;
+//
+//
+//  return (r_path);
+//}

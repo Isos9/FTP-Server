@@ -6,8 +6,8 @@ int user_cmd(my_sock *_sock, char **resp)
   {
     if (!_sock->client.logged)
     {
-        strcpy(_sock->client.user, resp[1]);
-        write_protocole(_sock, 331);
+      strcpy(_sock->client.user, resp[1]);
+      write_protocole(_sock, 331);
     }
     else
       write_protocole_s(_sock, "530 User already logged\n");
@@ -45,16 +45,11 @@ int syst_cmd(my_sock *_sock, char **resp)
 
   if (resp)
   {
-    if (_sock->client.logged)
-    {
-      buf = malloc(sizeof(struct utsname));
-      uname(buf);
-      msg = malloc(sizeof(char) * (strlen(buf->sysname) + 2));
-      sprintf(msg, "215 %s\n", buf->sysname);
-      write_protocole_s(_sock, msg);
-    }
-    else
-      write_protocole_s(_sock, "530 Please login with USER and PASS.\n");
+    buf = malloc(sizeof(struct utsname));
+    uname(buf);
+    msg = malloc(sizeof(char) * (strlen(buf->sysname) + 2));
+    sprintf(msg, "215 %s\n", buf->sysname);
+    write_protocole_s(_sock, msg);
   }
   return (0);
 }
